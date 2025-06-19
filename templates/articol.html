@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ articol[0] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>{{ articol[0] }}</h1>
+    <div class="card">
+        {{ articol[1]|safe }}
+    </div>
+    
+    <div class="tags-section">
+        <h3>Etichete:</h3>
+        {% if etichete %}
+            <div class="tags-container">
+                {% for eticheta in etichete %}
+                    <span class="tag">
+                        <a href="{{ url_for('search_by_tag', tag=eticheta[1]) }}">{{ eticheta[1] }}</a>
+                        {% if session.logged_in %}
+                            <a href="{{ url_for('remove_tag', articol_id=articol_id, eticheta_id=eticheta[0]) }}" class="remove-tag">×</a>
+                        {% endif %}
+                    </span>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Nu există etichete adăugate.</p>
+        {% endif %}
+        
+        {% if session.logged_in %}
+            <a href="{{ url_for('add_tag', articol_id=articol_id) }}" class="btn">Adaugă etichetă</a>
+        {% endif %}
+    </div>
+    
+    <a href="{{ url_for('index') }}">← Înapoi</a>
+</div>
+</body>
+</html>

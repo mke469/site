@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Articole de Matematică</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Articole de Matematică</h1>
+
+    <div class="top-bar">
+        {% if session.logged_in %}
+            <a href="{{ url_for('add') }}">Adaugă articol</a> |
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </div>
+
+    <div class="search-bar">
+        <form method="get">
+            <input type="text" name="q" placeholder="Caută titlu..." value="{{ request.args.get('q', '') }}">
+        </form>
+    </div>
+
+    {% if toate_etichetele %}
+    <div class="tag-cloud">
+        <h3>Etichete:</h3>
+        {% for eticheta in toate_etichetele %}
+            <a href="{{ url_for('search_by_tag', tag=eticheta[1]) }}" 
+               class="tag {% if tag_cautat == eticheta[1] %}active{% endif %}">
+                {{ eticheta[1] }}
+            </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% for articol in articole %}
+        <div class="card">
+            <h3>{{ articol[1] }}</h3>
+            <p>{{ articol[2]|striptags|truncate(100, True, '...') }}</p>
+            <a class="btn" href="{{ url_for('articol', articol_id=articol[0]) }}">Citește</a>
+            {% if session.logged_in %}
+                <a class="btn" href="{{ url_for('edit', articol_id=articol[0]) }}">Editează</a>
+                <a class="btn btn-delete" href="{{ url_for('delete', articol_id=articol[0]) }}" onclick="return confirm('Sigur?')">Șterge</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>

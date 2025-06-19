@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Editează Articol</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2>Înlocuiește articolul: {{ titlu }}</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="fisier" accept=".docx" required>
+            <button class="btn" type="submit">Actualizează</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

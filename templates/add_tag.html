@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Adaugă Etichetă</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2>Adaugă etichetă</h2>
+        <form method="POST">
+            <input type="text" name="nume_eticheta" placeholder="Nume etichetă" required>
+            <button class="btn" type="submit">Adaugă</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

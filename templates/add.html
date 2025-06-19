@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Adaugă Articol</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2>Adaugă articol</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="titlu" placeholder="Titlu articol" required>
+            <input type="file" name="fisier" accept=".docx" required>
+            <button class="btn" type="submit">Încarcă</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
